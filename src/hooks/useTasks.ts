@@ -1,5 +1,7 @@
+import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
 import type { Task } from "../types/task";
+
 
 const STORAGE_KEY = "task-dashboard-tasks";
 
@@ -35,11 +37,22 @@ export function useTasks() {
 
   const toggleTask = (id: string) => {
     setTasks((prev: Task[]) =>
-      prev.map((task: Task) =>
-        task.id === id
-          ? { ...task, completed: !task.completed }
-          : task
-      )
+        prev.map((task: Task) => {
+        if (task.id === id) {
+            // 🎉 Disparar confeti SOLO al completar
+            if (!task.completed) {
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ["#f43f5e", "#fb7185", "#fda4af"],
+            });
+            }
+
+            return { ...task, completed: !task.completed };
+        }
+        return task;
+        })
     );
   };
 
