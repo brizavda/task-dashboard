@@ -14,7 +14,7 @@ function TaskItem({ task, onToggle, onRemove }: TaskItemProps) {
           type="checkbox"
           checked={task.completed}
           onChange={() => onToggle(task.id)}
-          className="w-4 h-4"
+          className="accent-rose-500 w-4 h-4"
         />
 
         <span
@@ -28,7 +28,7 @@ function TaskItem({ task, onToggle, onRemove }: TaskItemProps) {
 
       <button
         onClick={() => onRemove(task.id)}
-        className="text-sm text-red-500 hover:text-red-600"
+        className="text-sm text-rose-500 hover:text-rose-600"
       >
         Delete
       </button>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TaskCounter from "./components/TaskCounter";
 import TaskFilters from "./components/TaskFilters";
 import TaskInput from "./components/TaskInput";
 import TaskList from "./components/TaskList";
@@ -15,9 +16,16 @@ function App() {
     return true;
   });
 
+  const totalTasks = tasks.length;
+  const pendingTasks = tasks.filter((task) => !task.completed).length;
+
   return (
     <div className="max-w-xl mx-auto p-10">
-      <h1 className="text-3xl font-bold mb-6">Task Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-2 text-rose-500">
+      Task Dashboard
+      </h1>
+
+      <TaskCounter total={totalTasks} pending={pendingTasks} />
 
       <TaskInput onAddTask={addTask} />
 

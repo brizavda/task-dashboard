@@ -20,8 +20,8 @@ function TaskFilters({ activeFilter, onChange }: TaskFiltersProps) {
             className={`px-3 py-1 rounded-full text-sm transition
               ${
                 isActive
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-rose-500 text-white"
+                : "bg-rose-100 text-rose-600 hover:bg-rose-200"
               }`}
           >
             {filter.charAt(0).toUpperCase() + filter.slice(1)}
