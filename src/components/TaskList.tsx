@@ -1,4 +1,5 @@
 import type { Task } from "../types/task";
+import EmptyState from "./EmptyState";
 import TaskItem from "./TaskItem";
 
 interface TaskListProps {
@@ -10,9 +11,7 @@ interface TaskListProps {
 function TaskList({ tasks, onToggleTask, onRemoveTask }: TaskListProps) {
   if (tasks.length === 0) {
     return (
-      <p className="text-gray-500 text-center">
-        No tasks yet. Add one above 👆
-      </p>
+      <EmptyState message="You're all done ✨ No tasks match this filter." />
     );
   }
 
