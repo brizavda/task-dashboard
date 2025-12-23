@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import type { Task } from "../types/task";
 import EmptyState from "./EmptyState";
 import TaskItem from "./TaskItem";
@@ -16,16 +17,26 @@ function TaskList({ tasks, onToggleTask, onRemoveTask }: TaskListProps) {
   }
 
   return (
-    <div>
-      {tasks.map((task) => (
-        <TaskItem
-          key={task.id}
-          task={task}
-          onToggle={onToggleTask}
-          onRemove={onRemoveTask}
-        />
-      ))}
-    </div>
+    <motion.div layout className="space-y-3">
+      <AnimatePresence>
+        {tasks.map((task) => (
+          <motion.div
+            key={task.id}
+            layout
+            initial={{ opacity: 0, y: 10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+          >
+            <TaskItem
+              task={task}
+              onToggle={onToggleTask}
+              onRemove={onRemoveTask}
+            />
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 

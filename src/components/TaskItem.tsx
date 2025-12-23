@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import type { Task } from "../types/task";
 
 interface TaskItemProps {
@@ -17,13 +18,14 @@ function TaskItem({ task, onToggle, onRemove }: TaskItemProps) {
           className="accent-rose-500 w-4 h-4"
         />
 
-        <span
-          className={`${
-            task.completed ? "line-through text-gray-400" : "text-gray-800"
-          }`}
-        >
-          {task.title}
-        </span>
+        <motion.span
+            layout
+            className={`${
+                task.completed ? "line-through text-gray-400" : "text-gray-800"
+            }`}
+            >
+            {task.title}
+        </motion.span>
       </label>
 
       <button
