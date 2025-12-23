@@ -1,8 +1,9 @@
 import TaskInput from "./components/TaskInput";
+import TaskList from "./components/TaskList";
 import { useTasks } from "./hooks/useTasks";
 
 function App() {
-  const { tasks, addTask } = useTasks();
+  const { tasks, addTask, toggleTask, removeTask } = useTasks();
 
   return (
     <div className="max-w-xl mx-auto p-10">
@@ -10,9 +11,11 @@ function App() {
 
       <TaskInput onAddTask={addTask} />
 
-      <pre className="mt-6 bg-gray-100 p-4 rounded">
-        {JSON.stringify(tasks, null, 2)}
-      </pre>
+      <TaskList
+        tasks={tasks}
+        onToggleTask={toggleTask}
+        onRemoveTask={removeTask}
+      />
     </div>
   );
 }
