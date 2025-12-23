@@ -9,32 +9,43 @@ interface TaskItemProps {
 
 function TaskItem({ task, onToggle, onRemove }: TaskItemProps) {
   return (
-    <div className="flex items-center justify-between p-4 border rounded-lg mb-3">
+    <motion.div
+      layout
+      animate={{ opacity: task.completed ? 0.8 : 1 }}
+      transition={{ duration: 0.2 }}
+      className="flex items-center justify-between p-4 border rounded-lg"
+    >
       <label className="flex items-center gap-3 cursor-pointer">
         <input
           type="checkbox"
           checked={task.completed}
           onChange={() => onToggle(task.id)}
-          className="accent-rose-500 w-4 h-4"
+          className="w-4 h-4 accent-rose-500"
         />
 
         <motion.span
-            layout
-            className={`${
-                task.completed ? "line-through text-gray-400" : "text-gray-800"
-            }`}
-            >
-            {task.title}
+          layout
+          initial={false}
+          animate={{
+            textDecoration: task.completed ? "line-through" : "none",
+            color: task.completed ? "#9ca3af" : "#1f2937",
+          }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          className="text-sm"
+        >
+          {task.title}
         </motion.span>
       </label>
 
-      <button
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => onRemove(task.id)}
         className="text-sm text-rose-500 hover:text-rose-600"
       >
         Delete
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   );
 }
 
