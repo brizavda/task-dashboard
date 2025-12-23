@@ -1,4 +1,6 @@
+import confetti from "canvas-confetti";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import type { Task } from "../types/task";
 
 interface TaskItemProps {
@@ -8,6 +10,21 @@ interface TaskItemProps {
 }
 
 function TaskItem({ task, onToggle, onRemove }: TaskItemProps) {
+  const wasCompleted = useRef(task.completed);
+
+  useEffect(() => {
+    if (!wasCompleted.current && task.completed) {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ["#f43f5e", "#fb7185", "#fda4af"],
+      });
+    }
+
+    wasCompleted.current = task.completed;
+  }, [task.completed]);
+
   return (
     <motion.div
       layout
